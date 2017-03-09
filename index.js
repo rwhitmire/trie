@@ -15,5 +15,5 @@ const names = [
 const trie = createTrie(names)
 console.log('trie:', trie)
 
-const results = searchTrie(trie, 'jo')
+const results = searchTrie(trie, 'jo', 2)
 console.log('results:', results)

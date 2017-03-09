@@ -4,16 +4,21 @@
  * @param {Array} arr
  * @param {Object} vertex
  * @param {String} prefix
+ * @param {Number} limit
  */
 
-const destructureVertex = function (arr, vertex, prefix) {
+const destructureVertex = function (arr, vertex, prefix, limit = Infinity) {
+  if(arr.length >= limit) {
+    return
+  }
+
   if(!Object.keys(vertex).length) {
     arr.push(prefix)
     return
   }
 
   for(let key in vertex) {
-    destructureVertex(arr, vertex[key], prefix + key)
+    destructureVertex(arr, vertex[key], prefix + key, limit)
   }
 }
 
@@ -23,7 +28,7 @@ const destructureVertex = function (arr, vertex, prefix) {
  * @param {String} prefix
  */
 
-const searchTrie = function (trie, prefix) {
+const searchTrie = function (trie, prefix, limit) {
   let vertex = trie
 
   for (let i = 0; i < prefix.length; i++) {
@@ -36,7 +41,7 @@ const searchTrie = function (trie, prefix) {
   }
 
   const arr = []
-  destructureVertex(arr, vertex, prefix)
+  destructureVertex(arr, vertex, prefix, limit)
   return arr
 }
 
